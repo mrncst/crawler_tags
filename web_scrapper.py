@@ -32,7 +32,7 @@ print page.status_code
 # Creating necessary objects for while loop
 i = 0
 d = []
-gtm_tag = 'gtm.js'
+gtm_tag = '/gtm.js'
 
 # Creating an empty list
 df = []
