@@ -10,8 +10,6 @@
 from bs4 import BeautifulSoup as bs
 import requests
 import re
-from pprint import pprint
-import xml.etree.ElementTree as et
 import pandas as pd
 import numpy as np
 
