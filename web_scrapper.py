@@ -1,11 +1,8 @@
-
 # coding: utf-8
 
-# In[2]:
-
-
-# Code by Mariana Castilho
+# Code by Mariana Castilho @mrncst
 # 03/03/2018
+
 # Import libraries
 from bs4 import BeautifulSoup as bs
 import requests
@@ -13,74 +10,34 @@ import re
 import pandas as pd
 import numpy as np
 
-
-# In[3]:
-
-
 # Import all the urls generated via sitemap
 website = pd.read_excel('file.xlsx')
 
-
-# In[4]:
-
-
 # Inspect the import
 website.head()
-
-
-# In[5]:
-
-
 website['urls'] = website['urls'].astype(str)
 website.head()
-
-
-# In[21]:
-
-
 website.iloc[0]
 
-
-# In[18]:
-
-
+# Create a function to call GET requests
 def crawl(url):
     return requests.get(url)
-
-
-# In[22]:
-
 
 # Download page
 page = crawl(website.iloc[0,0])
 
-
-# In[61]:
-
-
 # Check if status is 200, which means the request was successful
 print page.status_code
-
-
-# In[63]:
-
 
 # Creating necessary objects for while loop
 i = 0
 d = []
 gtm_tag = 'gtm.js'
 
-
-# In[64]:
-
-
-# Creating an emty list
+# Creating an empty list
 df = []
 
-
-# In[65]:
-
-
+# This loop will consult all the urls into the DataFrame we created from the sitemap file, request their codes and check if there's the tag we're looking from in every item in the df
 while i < len(website):
     try:
         d = crawl(website.iloc[i,0])
@@ -95,17 +52,11 @@ while i < len(website):
         df.append(0)
     i = i + 1
 
-
-# In[66]:
-
-
+# Check how it looks and create a new DataFrame to write an file
 print df
-
-
-# In[67]:
-
-
 df_done = pd.DataFrame(df)
 df_done.columns = ['Check']
 print df_done
 
+# Write the final output in a file
+df_done.to_csv('tag_audit.csv', sep='\t', encoding='utf-8')
