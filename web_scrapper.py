@@ -60,3 +60,32 @@ print df_done
 
 # Write the final output in a file
 df_done.to_csv('tag_audit.csv', sep='\t', encoding='utf-8')
+
+# Check the tags in the GTM container
+gtm_id = 'GTM-XXXXX' # Insert the GTM account id. It looks like GTM-XXXX
+gtm_url = 'https://www.googletagmanager.com/gtm.js?id='
+gtm = gtm_url + gtm_id
+
+# Request GTM page
+page_gtm = requests.get(gtm)
+
+# Define de tags you want to find inside GTM
+dbm = 'doubleclick'
+fb = 'facebook'
+twitter = 'twitter'
+
+# Check the page for the tags you want tof ind
+if page_gtm_string.find(dbm) >= 0:
+    print 'DBM'
+else:
+    print 'No DBM'
+
+if page_gtm_string.find(dbm) >= 0:
+    print 'Facebook'
+else:
+    print 'No Facebook'
+    
+if page_gtm_string.find(twitter) >= 0:
+    print 'Twitter'
+else:
+    print 'No Twitter'
